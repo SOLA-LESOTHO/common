@@ -72,6 +72,7 @@ public class RolesConstants {
     public static final String ADMINISTRATIVE_DISPUTE_SAVE = "DisputeSave";
     public static final String ADMINISTRATIVE_DISPUTE_COMMENTS_SAVE = "DisputeCommentsSave";
     public static final String ADMINISTRATIVE_DISPUTE_SEARCH = "DisputeSearch";
+     public static final String ADMINISTRATIVE_DISPUTE_PARTY_SAVE = "DisputePartySave";
     
     // TRANSACTIONAL DOCUMENTS
     public static final String SOURCE_TRANSACTIONAL = "TransactionCommit";
