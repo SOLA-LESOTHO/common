@@ -69,6 +69,7 @@ public class RolesConstants {
     public static final String ADMINISTRATIVE_BA_UNIT_SEARCH = "BaunitSearch";
     public static final String ADMINISTRATIVE_SYSTEMATIC_REGISTRATION = "systematicRegn";
     public static final String ADMINISTRATIVE_RIGHTS_EXPORT = "RightsExport";
+    public static final String ADMINISTRATIVE_DISPUTE_VIEW = "DisputeView";
     public static final String ADMINISTRATIVE_DISPUTE_SAVE = "DisputeSave";
     public static final String ADMINISTRATIVE_DISPUTE_COMMENTS_SAVE = "DisputeCommentsSave";
     public static final String ADMINISTRATIVE_DISPUTE_SEARCH = "DisputeSearch";
