@@ -128,7 +128,7 @@ public class MappingUtility {
                 if (MappingUtility.isSimpleType(srcField.getType())) {
                     Field destField = MappingUtility.getField(destFieldList, srcField.getName());
                     if (destField == null) {
-                        break;
+                        continue;
                     }
                     if (result == null) {
                         result = org.dozer.util.ReflectionUtils.newInstance(destClass);
@@ -181,13 +181,18 @@ public class MappingUtility {
                 destination = MappingUtility.createList(destClass);
             }
             for (Object srcObj : source) {
-                int index = -1;
+                Object destObj = null;
                 if (matchSrcObj) {
                     Object tempDestObj = mapSimpleFields(srcObj, destClass);
-                    index = destination.indexOf(tempDestObj);
+                    for (Object dstObj : destination) {
+                        if(dstObj.equals(tempDestObj)){
+                            destObj = dstObj;
+                            break;
+                        }
+                    }
                 }
-                if (index > -1) {
-                    mapper.map(srcObj, destination.get(index));
+                if (destObj!=null) {
+                    mapper.map(srcObj, destObj);
                 } else {
                     destination.add(mapper.map(srcObj, destClass));
                 }
