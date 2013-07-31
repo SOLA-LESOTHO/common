@@ -29,10 +29,12 @@
  */
 package org.sola.common;
 
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.Window;
+import java.awt.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 /**
  * Provides methods to work with Windows.
@@ -81,6 +83,38 @@ public class WindowUtility {
             int x = ((dim.width) / 2);
             int y = ((dim.height) / 2);
             form.setLocation(x - (form.getWidth() / 2), y - (form.getHeight() / 2));
+        }
+    }
+    
+    /**
+     * Commits changes on such fields as editable combobox and formatted text
+     * fields
+     * @param c Topmost container to start searching for components.
+     */
+    public static void commitChanges(Container c) {
+        for (Component co : c.getComponents()) {
+            if (Container.class.isAssignableFrom(co.getClass())) {
+                commitChanges((Container) co);
+            }
+
+            // Editable combobox
+            if (JComboBox.class.isAssignableFrom(co.getClass())) {
+                JComboBox cbx = (JComboBox)co;
+                if (cbx.isEditable() && cbx.isEnabled() && cbx.getEditor().getEditorComponent().hasFocus()) {
+                    cbx.setSelectedItem(cbx.getEditor().getItem());
+                }
+            }
+
+            // Formatted text field
+            if (JFormattedTextField.class.isAssignableFrom(co.getClass())) {
+                JFormattedTextField fmtFiled = (JFormattedTextField)co;
+                if (fmtFiled.isEditable() && fmtFiled.isEnabled() && fmtFiled.hasFocus()) {
+                    try {
+                        fmtFiled.commitEdit();
+                    } catch (ParseException ex) {
+                    }
+                }
+            }
         }
     }
 }
