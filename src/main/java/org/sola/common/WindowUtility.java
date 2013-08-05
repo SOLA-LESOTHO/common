@@ -31,8 +31,7 @@ package org.sola.common;
 
 import java.awt.*;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
@@ -40,6 +39,19 @@ import javax.swing.JFormattedTextField;
  * Provides methods to work with Windows.
  */
 public class WindowUtility {
+
+    public static Class<?> preferenceClass;
+
+    /**
+     * Retrieves the preference package based on the specified preferenceClass
+     */
+    public static Preferences getUserPreferences() {
+        return Preferences.userNodeForPackage(preferenceClass);
+    }
+
+    public static boolean hasUserPreferences() {
+        return preferenceClass != null;
+    }
 
     /**
      * Returns the top visible frame.
@@ -85,10 +97,11 @@ public class WindowUtility {
             form.setLocation(x - (form.getWidth() / 2), y - (form.getHeight() / 2));
         }
     }
-    
+
     /**
      * Commits changes on such fields as editable combobox and formatted text
      * fields
+     *
      * @param c Topmost container to start searching for components.
      */
     public static void commitChanges(Container c) {
@@ -99,7 +112,7 @@ public class WindowUtility {
 
             // Editable combobox
             if (JComboBox.class.isAssignableFrom(co.getClass())) {
-                JComboBox cbx = (JComboBox)co;
+                JComboBox cbx = (JComboBox) co;
                 if (cbx.isEditable() && cbx.isEnabled() && cbx.getEditor().getEditorComponent().hasFocus()) {
                     cbx.setSelectedItem(cbx.getEditor().getItem());
                 }
@@ -107,7 +120,7 @@ public class WindowUtility {
 
             // Formatted text field
             if (JFormattedTextField.class.isAssignableFrom(co.getClass())) {
-                JFormattedTextField fmtFiled = (JFormattedTextField)co;
+                JFormattedTextField fmtFiled = (JFormattedTextField) co;
                 if (fmtFiled.isEditable() && fmtFiled.isEnabled() && fmtFiled.hasFocus()) {
                     try {
                         fmtFiled.commitEdit();
