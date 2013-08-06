@@ -40,18 +40,26 @@ import javax.swing.JFormattedTextField;
  */
 public class WindowUtility {
 
-    public static Class<?> preferenceClass;
+    private static Class<?> mainAppClass;
 
     /**
      * Retrieves the preference package based on the specified preferenceClass
      */
     public static Preferences getUserPreferences() {
-        return Preferences.userNodeForPackage(preferenceClass);
+        return Preferences.userNodeForPackage(mainAppClass);
     }
 
     public static boolean hasUserPreferences() {
-        return preferenceClass != null;
+        return mainAppClass != null;
     }
+
+    public static Class<?> getMainAppClass() {
+        return mainAppClass;
+    }
+
+    public static void setMainAppClass(Class<?> mainAppClass) {
+        WindowUtility.mainAppClass = mainAppClass;
+    } 
 
     /**
      * Returns the top visible frame.

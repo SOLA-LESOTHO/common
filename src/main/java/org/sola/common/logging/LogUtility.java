@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.prefs.Preferences;
 import org.sola.common.DateUtility;
+import org.sola.common.WindowUtility;
 
 /**
  * Uses Java Utility Logging to log details to the SOLA Log file. The log file is located at
@@ -54,7 +55,6 @@ public final class LogUtility {
     public static final String SOLA_COMMON_LOGGER = "org.sola.common";
     private static final String LOG_LEVEL_PREFERENCE = "logLevel";
     private final static Logger solaLog = Logger.getLogger(SOLA_COMMON_LOGGER);
-    private static Class<?> mainClass = null;
     private static boolean logConfigured = false;
 
     /**
@@ -69,8 +69,8 @@ public final class LogUtility {
         String formattedDate = DateUtility.simpleFormat(DATE_FORMAT_NOW);
         String logFileDir = System.getProperty("user.home") + "/sola/logs/";
         String logFile = logFileDir + formattedDate + ".log";
-        if (mainClass != null) {
-            logFile = logFileDir + mainClass.getSimpleName() + "_" + formattedDate + ".log";
+        if (WindowUtility.getMainAppClass() != null) {
+            logFile = logFileDir + WindowUtility.getMainAppClass().getSimpleName() + "_" + formattedDate + ".log";
         }
 
         try {
@@ -88,8 +88,8 @@ public final class LogUtility {
             // Determine the appropriate level to set for the Logger by checking if the user
             // has any level preferences. 
             Level levelPref = Level.INFO;
-            if (mainClass != null) {
-                Preferences prefs = Preferences.userNodeForPackage(mainClass);
+            if (WindowUtility.hasUserPreferences()) {
+                Preferences prefs = WindowUtility.getUserPreferences();
                 String lev = prefs.get(LOG_LEVEL_PREFERENCE, Level.INFO.toString());
                 levelPref = Level.parse(lev);
             }
@@ -166,8 +166,8 @@ public final class LogUtility {
             logger.setLevel(Level.INFO);
             log("*** " + SOLA_COMMON_LOGGER + " log level set to " + logLevel.toString() + " ***");
             logger.setLevel(logLevel);
-            if (mainClass != null) {
-                Preferences prefs = Preferences.userNodeForPackage(mainClass);
+            if (WindowUtility.hasUserPreferences()) {
+                Preferences prefs = WindowUtility.getUserPreferences();
                 prefs.put(LOG_LEVEL_PREFERENCE, logLevel.toString());
             }
         }
@@ -184,15 +184,6 @@ public final class LogUtility {
             logLevel = logger.getLevel();
         }
         return logLevel;
-    }
-
-    /**
-     * The main application class is used to control the name of the log file as well as the
-     * the location to store user preferences for the log level.
-     * @param mainLoggerClass The main application class
-     */
-    public static void initialize(Class<?> mainApplicationClass) {
-        mainClass = mainApplicationClass;
     }
 
     /**
