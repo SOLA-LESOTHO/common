@@ -1,3 +1,10 @@
+/**
+ * This class will convert numeric values into an english representation
+ * 
+ * For units, see : http://www.jimloy.com/math/billion.htm
+ * 
+ * @author yanick.rochon@gmail.com
+ */
 package org.sola.common;
 
 import java.util.ArrayList;
