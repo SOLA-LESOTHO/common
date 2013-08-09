@@ -35,7 +35,6 @@ public class RolesConstants {
     // DASHBOARD
     public static final String DASHBOARD_VIEW_ASSIGNED_APPS = "DashbrdViewAssign";
     public static final String DASHBOARD_VIEW_UNASSIGNED_APPS = "DashbrdViewUnassign";
-    public static final String DASHBOARD_VIEW_OWN_APPS = "DashbrdViewOwn";
 
     // APPLICATION
     public static final String APPLICATION_VIEW_APPS = "ApplnView";
@@ -59,12 +58,10 @@ public class RolesConstants {
     public static final String APPLICATION_VALIDATE = "ApplnValidate";
     public static final String APPLICATION_DISPATCH = "ApplnDispatch";
     public static final String APPLICATION_ARCHIVE = "ApplnArchive";
+    public static final String APPLICATION_FORM_VIEW = "AppFormView";
 
     // ADMINISTRATIVE
     public static final String ADMINISTRATIVE_BA_UNIT_SAVE = "BaunitSave";
-    public static final String ADMINISTRATIVE_RRR_SAVE = "BaunitrrrSave";
-    public static final String ADMINISTRATIVE_PARCEL_SAVE = "BaunitParcelSave";
-    public static final String ADMINISTRATIVE_NOTATION_SAVE = "BaunitNotnSave";
     public static final String ADMINISTRATIVE_BA_UNIT_PRINT_CERT = "BaunitCertificate";
     public static final String ADMINISTRATIVE_BA_UNIT_SEARCH = "BaunitSearch";
     public static final String ADMINISTRATIVE_SYSTEMATIC_REGISTRATION = "systematicRegn";
@@ -74,7 +71,6 @@ public class RolesConstants {
     public static final String ADMINISTRATIVE_DISPUTE_COMMENTS_SAVE = "DisputeCommentsSave";
     public static final String ADMINISTRATIVE_DISPUTE_SEARCH = "DisputeSearch";
     public static final String ADMINISTRATIVE_DISPUTE_PARTY_SAVE = "DisputePartySave";
-    public static final String ADMINISTRATIVE_NEW_LEASE = "newLease";
     public static final String ADMINISTRATIVE_MANAGE_LEASE = "manageLease";
     public static final String ADMINISTRATIVE_REGISTER_LEASE = "regLease";
     
@@ -89,20 +85,19 @@ public class RolesConstants {
     // GIS
     public static final String GIS_VIEW_MAP = "ViewMap";
     public static final String GIS_PRINT = "PrintMap";
-    public static final String GIS_EXPORT_MAP = GIS_PRINT; //"ExportMap";
+    public static final String GIS_EXPORT_MAP = "ExportMap";
 
     // CADASTRE
     public static final String CADASTRE_PARCEL_SAVE = "ParcelSave";
 
     // PARTY
     public static final String PARTY_SAVE = "PartySave";
+    public static final String PARTY_SEARCH = "PartySearch";
     public static final String PARTY_RIGHTHOLDERS_SAVE = "RHSave";
 
     // REPORTS
-    public static final String REPORTS_VIEW = "ReportGen";
+    public static final String REPORTS_VIEW = "ReportGenerate";
     
-    // ARCHIVE
-    public static final String ARCHIVE_ARCHIVE_APPS = "ArchiveApps";
     
     // ADMIN
     public static final String ADMIN_MANAGE_SECURITY = "ManageSecurity";
@@ -112,4 +107,7 @@ public class RolesConstants {
 
     // BULK APPLICATION
     public static final String BULK_APPLICATION = "BulkApplication";
+    
+    // USER
+    public static final String USER_CHANGE_PASSWORD = "ChangePassword";
 }
