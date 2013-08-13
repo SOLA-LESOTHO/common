@@ -60,6 +60,7 @@ public class RolesConstants {
     public static final String APPLICATION_DISPATCH = "ApplnDispatch";
     public static final String APPLICATION_ARCHIVE = "ApplnArchive";
     public static final String APPLICATION_FORM_VIEW = "AppFormView";
+    public static final String APPLICATION_CORRECTION_SERVICE_START = "registrarCorrection";
 
     // ADMINISTRATIVE
     public static final String ADMINISTRATIVE_BA_UNIT_SAVE = "BaunitSave";
