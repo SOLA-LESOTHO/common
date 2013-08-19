@@ -387,17 +387,18 @@ public class FileUtility {
 
                     // draw the first page to an image
                     PDFPage page = pdffile.getPage(0);
-
+                    
                     //get the width and height for the doc at the default zoom 
-                    Rectangle rect = new Rectangle(0, 0,
-                            (int) page.getBBox().getWidth(),
-                            (int) page.getBBox().getHeight());
+//                    Rectangle rect = new Rectangle(0, 0,
+//                            (int) page.getBBox().getWidth(),
+//                            (int) page.getBBox().getHeight());
 
-                    //generate the image
+                    //generate the imageGreeney109
                     thumbnail = page.getImage(
-                            rect.width, rect.height, //width & height
-                            rect, // clip rect
-                            null, // null for the ImageObserver
+                           (int)page.getWidth() * 3,
+                           (int)page.getHeight() * 3,
+                            null, // null for the clip rectangle to ensure entire page is captured
+                            null,
                             true, // fill background with white
                             true // block until drawing is done
                             );
