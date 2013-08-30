@@ -227,6 +227,19 @@ public class FileUtility {
         return ext;
     }
     
+    /**
+     * Returns file name excluding extention.
+     *
+     * @param fileName The name of the file.
+     */
+    public static String getFileNameWithoutExtension(String fileName) {
+        String name = fileName;
+        if (fileName.lastIndexOf(".") > 0 && fileName.lastIndexOf(".") < fileName.length()) {
+            name = fileName.substring(0, fileName.lastIndexOf("."));
+        }
+        return name;
+    }
+    
     /*
      * Get the extension of a file.
      */  
