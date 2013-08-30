@@ -406,7 +406,7 @@ public class FileUtility {
 //                            (int) page.getBBox().getWidth(),
 //                            (int) page.getBBox().getHeight());
 
-                    //generate the imageGreeney109
+                    //generate the image
                     thumbnail = page.getImage(
                            (int)page.getWidth() * 3,
                            (int)page.getHeight() * 3,
