@@ -175,7 +175,7 @@ public class NumberToWords {
     static public class TensProcessor extends AbstractProcessor {
 
         static private final String[] TOKENS = new String[] {
-            "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"
+            "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
         };
 
         static private final String UNION_SEPARATOR = "-";
