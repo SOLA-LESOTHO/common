@@ -36,6 +36,8 @@ public class RolesConstants {
     // DASHBOARD
     public static final String DASHBOARD_VIEW_ASSIGNED_APPS = "DashbrdViewAssign";
     public static final String DASHBOARD_VIEW_UNASSIGNED_APPS = "DashbrdViewUnassign";
+    public static final String DASHBOARD_VIEW_ASSIGNED_APPS_ALL = "viewAssignAll";
+    public static final String DASHBOARD_VIEW_UNASSIGNED_APPS_ALL = "viewUnassignAll";
 
     // APPLICATION
     public static final String APPLICATION_VIEW_APPS = "ApplnView";
