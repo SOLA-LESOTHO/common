@@ -1,12 +1,14 @@
 /**
  * This class will convert numeric values into an english representation
- * 
+ *
  * For units, see : http://www.jimloy.com/math/billion.htm
- * 
+ *
  * @author yanick.rochon@gmail.com
  */
 package org.sola.common;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,24 +18,27 @@ import java.util.List;
 public class NumberToWords {
 
     static public class ScaleUnit {
+
         private int exponent;
         private String[] names;
-        private ScaleUnit(int exponent, String...names) {
+
+        private ScaleUnit(int exponent, String... names) {
             this.exponent = exponent;
             this.names = names;
         }
+
         public int getExponent() {
             return exponent;
         }
+
         public String getName(int index) {
             return names[index];
         }
     }
-
     /**
      * See http://www.wordiq.com/definition/Names_of_large_numbers
      */
-    static private ScaleUnit[] SCALE_UNITS = new ScaleUnit[] {
+    static private ScaleUnit[] SCALE_UNITS = new ScaleUnit[]{
         new ScaleUnit(63, "vigintillion", "decilliard"),
         new ScaleUnit(60, "novemdecillion", "decillion"),
         new ScaleUnit(57, "octodecillion", "nonilliard"),
@@ -81,12 +86,12 @@ public class NumberToWords {
         new ScaleUnit(-21, "sextillionth", "trilliardth"),
         new ScaleUnit(-22, "ten-sextillionth", "ten-trilliardth"),
         new ScaleUnit(-23, "hundred-sextillionth", "hundred-trilliardth"),
-        new ScaleUnit(-24, "septillionth","quadrillionth"),
-        new ScaleUnit(-25, "ten-septillionth","ten-quadrillionth"),
-        new ScaleUnit(-26, "hundred-septillionth","hundred-quadrillionth"),
-    };
+        new ScaleUnit(-24, "septillionth", "quadrillionth"),
+        new ScaleUnit(-25, "ten-septillionth", "ten-quadrillionth"),
+        new ScaleUnit(-26, "hundred-septillionth", "hundred-quadrillionth"),};
 
     static public enum Scale {
+
         SHORT,
         LONG;
 
@@ -96,16 +101,14 @@ public class NumberToWords {
                     return unit.getName(this.ordinal());
                 }
             }
-            return ""; 
+            return "";
         }
     }
-
     /**
-     * Change this scale to support American and modern British value (short scale)
-     * or Traditional British value (long scale)
+     * Change this scale to support American and modern British value (short
+     * scale) or Traditional British value (long scale)
      */
-    static public Scale SCALE = Scale.SHORT; 
-
+    static public Scale SCALE = Scale.SHORT;
 
     static abstract public class AbstractProcessor {
 
@@ -138,7 +141,7 @@ public class NumberToWords {
 
     static public class UnitProcessor extends AbstractProcessor {
 
-        static private final String[] TOKENS = new String[] {
+        static private final String[] TOKENS = new String[]{
             "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
         };
@@ -169,17 +172,14 @@ public class NumberToWords {
 
             return buffer.toString();
         }
-
     }
 
     static public class TensProcessor extends AbstractProcessor {
 
-        static private final String[] TOKENS = new String[] {
+        static private final String[] TOKENS = new String[]{
             "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
         };
-
         static private final String UNION_SEPARATOR = "-";
-
         private UnitProcessor unitProcessor = new UnitProcessor();
 
         @Override
@@ -216,7 +216,6 @@ public class NumberToWords {
     static public class HundredProcessor extends AbstractProcessor {
 
         private int EXPONENT = 2;
-
         private UnitProcessor unitProcessor = new UnitProcessor();
         private TensProcessor tensProcessor = new TensProcessor();
 
@@ -321,9 +320,7 @@ public class NumberToWords {
 
         static private String MINUS = "minus";
         static private String UNION_AND = "and";
-
         static private String ZERO_TOKEN = "zero";
-
         private AbstractProcessor processor = new CompositeBigProcessor(63);
 
         @Override
@@ -346,17 +343,47 @@ public class NumberToWords {
             if (name.isEmpty()) {
                 name = ZERO_TOKEN;
             } else if (negative) {
-                name = MINUS.concat(SEPARATOR).concat(name); 
+                name = MINUS.concat(SEPARATOR).concat(name);
             }
 
             if (!(null == decimalValue || decimalValue.isEmpty())) {
-                name = name.concat(SEPARATOR).concat(UNION_AND).concat(SEPARATOR)
-                    .concat(processor.getName(decimalValue))
-                    .concat(SEPARATOR).concat(SCALE.getName(-decimalValue.length()));
+                name = name.concat(SEPARATOR).concat(UNION_AND).concat(SEPARATOR).concat(processor.getName(decimalValue)).concat(SEPARATOR).concat(SCALE.getName(-decimalValue.length()));
             }
 
             return name;
         }
+    }
 
+    /**
+     * Returns amount in maloti together with cents and numbers in brackets
+     */
+    public static String getFullAmountString(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
+            return "ZERO MALUTI (M 0.00)";
+        }
+
+        NumberToWords.DefaultProcessor processor = new NumberToWords.DefaultProcessor();
+
+        int cents = (amount.remainder(BigDecimal.ONE).multiply(new BigDecimal(100))).intValue();
+        
+        String centsString = String.valueOf(cents);
+        String centsWords = "";
+
+        if (cents < 10) {
+            centsString = "0" + centsString;
+        }
+
+        if (cents > 0) {
+            String tmp = String.valueOf(cents);
+            if(tmp.length()>2){
+                cents = Integer.parseInt(tmp.substring(0, 2));
+            }
+            centsWords = " " + processor.getName(cents).toUpperCase() + " CENTS";
+        }
+
+        String maloti = processor.getName(amount.intValue()).toUpperCase()
+                + " MALOTI"
+                + centsWords + " (M" + amount.intValue() + "." + centsString + ")";
+        return maloti;
     }
 }
