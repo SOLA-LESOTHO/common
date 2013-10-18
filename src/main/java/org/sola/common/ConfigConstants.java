@@ -36,6 +36,8 @@ package org.sola.common;
  */
 public class ConfigConstants {
 
+    public static final String SETTING_ON = "ON";
+    public static final String SETTING_OFF = "OFF";
     /**
      * tax-rate - The tax rate to use for financial calculations. Changes to
      * this setting will have immediate effect. Default 0.075.
@@ -185,4 +187,9 @@ public class ConfigConstants {
      * changes to this setting to take effect.
      */
     public static final String MAP_NORTH = "map-north";
+    /**
+     * slr-db-connection - Indicates if SOLA has a valid connection to the SLR
+     * Lesotho database. OFF by default. To enable, set to ON.
+     */
+    public static final String SLR_DATABASE_CONNECTION = "slr-db-connection";
 }
