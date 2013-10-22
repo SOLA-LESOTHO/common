@@ -114,4 +114,7 @@ public class RolesConstants {
     
     // USER
     public static final String USER_CHANGE_PASSWORD = "ChangePassword";
+    
+    // SLR Migration
+    public static final String SLR_MIGRATION = "SlrMigration"; 
 }
