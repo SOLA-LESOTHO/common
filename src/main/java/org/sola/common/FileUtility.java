@@ -64,7 +64,7 @@ public class FileUtility {
     private static long resizedCacheSizeBytes = 120 * 1024 * 1024;
     private static int minNumberCachedFiles = 10;
     private static long maxFileSizeBytes = 100 * 1024 * 1024;
-    private static String cachePath = System.getProperty("user.home") + "/sola/cache/documents/";
+    private static String cachePath = System.getProperty("user.home") + "/documents/sola/cache/documents/";
 
     /**
      * Checks the cache to ensure it won't exceed the max size cache size. If the new document will
