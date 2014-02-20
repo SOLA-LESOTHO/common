@@ -380,10 +380,12 @@ public class NumberToWords {
             }
             centsWords = " " + processor.getName(cents).toUpperCase() + " CENTS";
         }
+        
+        String formatter = String.format("%,d", amount.intValue());
 
         String maloti = processor.getName(amount.intValue()).toUpperCase()
                 + " MALOTI"
-                + centsWords + " (M" + amount.intValue() + "." + centsString + ")";
+                + centsWords + " (M" + formatter + "." + centsString + ")";
         return maloti;
     }
 }
