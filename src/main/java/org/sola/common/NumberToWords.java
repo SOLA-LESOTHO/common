@@ -242,7 +242,7 @@ public class NumberToWords {
             String tensName = tensProcessor.getName(number % 100);
 
             if (!tensName.isEmpty() && (number >= 100)) {
-                buffer.append(SEPARATOR);
+                buffer.append(SEPARATOR + " and ");
             }
             buffer.append(tensName);
 
